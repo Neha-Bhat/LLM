@@ -16,7 +16,6 @@ const ChatWindow = () => {
             },
             body: JSON.stringify({prompt})
         })
-        console.log(prompt)
         const data = await res.json();
         setResponse(data.output || 'No result generated');
         } catch(error) {
