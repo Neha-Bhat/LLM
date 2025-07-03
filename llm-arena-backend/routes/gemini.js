@@ -15,7 +15,8 @@ router.post('/', async (req,res) => {
         //Save to Mongo DB
         const newPrompt = new geminiPrompt({
             prompt: userPrompt,
-            response: geminiResponse
+            response: geminiResponse,
+            createdAt: Date.now()
         })
 
         await newPrompt.save();

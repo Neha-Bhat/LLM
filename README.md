@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# 🧠 LLM Arena — GenAI Playground Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web application that lets users interact with multiple LLMs (Large Language Models) using a unified UI. Built with React (frontend) and Node.js + Express (backend), the app integrates popular GenAI APIs and stores user interactions in MongoDB.
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+- 🔌 **Multi-Model Support** — Plug-and-play integration for:
+  - Gemini (`gemini-1.5-flash-latest`)
+  - Cohere
+  - Mistral
+  - Groq
+- 💬 **Prompt-Response Chat UI**
+  - Users can submit prompts dynamically
+  - Instant LLM-generated responses
+- 🗂️ **Session-Based Chat (Upcoming)**
+  - Maintain context for each model
+  - View past prompt-response history
+- 🛠️ **MongoDB Persistence**
+  - Stores prompts, responses, timestamps, and model info
+- 🌐 **API Key Management**
+  - Secured via `.env` configuration
 
-### `npm start`
+## 🔧 Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Layer       | Technology         |
+|------------|--------------------|
+| Frontend   | React              |
+| Backend    | Node.js, Express   |
+| Database   | MongoDB (Mongoose) |
+| AI Models  | Gemini, Groq, Cohere, Mistral |
+| Deployment | (Upcoming)         |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📦 Folder Structure
 
-### `npm test`
+/llm-arena → React frontend
+/llm-arena-backend
+├── /routes → Model routers (e.g., gemini.js)
+├── /models → Mongoose schemas
+└── index.js → Express server setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## 📌 How to Use
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repo  
+2. Set up your `.env` in `/llm-arena-backend`:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+GEMINI_API_KEY=your_key
+MONGODB_URI=your_connection_string
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Run backend:
 
-### `npm run eject`
+cd llm-arena-backend
+npm install
+node index.js
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Run frontend:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+cd client
+npm install
+npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+🚀 Planned Features
+ Cohere, Mistral, Groq integration
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+ Session-based chat for each model
 
-## Learn More
+ Chat history display
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ UI polish (tabs, loaders, bubbles)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ Vercel/Render deployment
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+👩‍💻 Built By
+Neha Gururaj
+Frontend Developer | Exploring GenAI | Career Switch Aspirant
