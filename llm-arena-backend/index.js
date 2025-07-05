@@ -14,6 +14,9 @@ mongoose.connect(process.env.MONGO_URI)
 const geminiRoute = require('./routes/gemini');
 app.use('/api/gemini', geminiRoute);
 
+// const cohereRoute = require('./routes/cohere');
+// app.use('/api/cohere', cohereRoute);
+
 app.get('/', (req, res) => {
     res.send("API is running")
 })

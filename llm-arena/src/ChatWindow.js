@@ -28,7 +28,7 @@ const ChatWindow = () => {
     }
     return (
         <div className="chat-container">
-            <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)}>{prompt}</textarea>
+            <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} maxLength={500} style={{ width: '500px' }}>{prompt}</textarea>
             <button onClick={fetchResponse} disabled={loading}>{loading ? 'Thinking': 'Ask Gemini'}</button>
             <div style={{marginTop: 20}}>
                 <strong>Gemini says:</strong>
