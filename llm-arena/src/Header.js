@@ -3,17 +3,18 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 
-const Header = () => {
-    const [llm, setLlm] = useState('Gemini')
+const Header = ({modelName, setModelName}) => {
+    // const [llm, setLlm] = useState('Gemini')
     function handleLLMSelection(eventKey) {
-        setLlm(eventKey)
-        console.log(llm)
+        // console.log(eventKey)
+        setModelName(eventKey)
+        console.log(modelName)
     }
     return (
         <div className="header">
             <Dropdown id="dropdown-basic-button" title="Chat Bots" className='flex' onSelect={handleLLMSelection}>
                 <Dropdown.Toggle variant="primary" id="dropdown-basic">
-        Gemini
+        {modelName}
       </Dropdown.Toggle>
                 <DropdownMenu>
                     <Dropdown.Item href="#/action-1" eventKey="Cohere">Cohere</Dropdown.Item>

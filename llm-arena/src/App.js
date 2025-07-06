@@ -5,8 +5,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SessionsList from './SessionsList';
 import ChatWindow from './ChatWindow';
+import { useState } from 'react';
 
 function App() {
+
+  let [modelName, setModelName] = useState('Gemini');
   return (
     <div className="App">
       <Container fluid>
@@ -16,10 +19,10 @@ function App() {
         </Col>
         <Col>
           <Row>
-            <Header />
+            <Header setModelName={setModelName} modelName={modelName} />
           </Row>
           <Row>
-            <ChatWindow />
+            <ChatWindow modelName={modelName} />
           </Row>
         </Col>
       </Row>
