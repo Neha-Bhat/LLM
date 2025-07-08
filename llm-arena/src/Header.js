@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 
 const Header = ({modelName, setModelName}) => {
@@ -17,10 +15,10 @@ const Header = ({modelName, setModelName}) => {
         {modelName}
       </Dropdown.Toggle>
                 <DropdownMenu>
-                    <Dropdown.Item href="#/action-1" eventKey="Cohere">Cohere</Dropdown.Item>
-                <Dropdown.Item href="#/action-2" eventKey="Gemini">Gemini</Dropdown.Item>
+                    <Dropdown.Item eventKey="Cohere">Cohere</Dropdown.Item>
+                <Dropdown.Item eventKey="Gemini">Gemini</Dropdown.Item>
                 {/* <Dropdown.Item href="#/action-3">Mistral</Dropdown.Item> */}
-                <Dropdown.Item href="#/action-3" eventKey="Groq">Groq</Dropdown.Item>
+                {/* <Dropdown.Item href="#/action-3" eventKey="Stability">Stability</Dropdown.Item> */}
                 </DropdownMenu>
             </Dropdown>
         </div>

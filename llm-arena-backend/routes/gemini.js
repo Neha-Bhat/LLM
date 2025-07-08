@@ -11,11 +11,13 @@ router.post('/', async (req,res) => {
         const model = genAI.getGenerativeModel({model: "models/gemini-1.5-flash-latest"})
         const result = await model.generateContent(req.body.prompt);
         const geminiResponse = result.response.text();
-
+        console.log(result)
         //Save to Mongo DB
         const newPrompt = new geminiPrompt({
             prompt: userPrompt,
             response: geminiResponse,
+            modelName: 'Gemini',
+            sessionID: 0,
             createdAt: Date.now()
         })
 
@@ -25,5 +27,14 @@ router.post('/', async (req,res) => {
         res.status(500).json({error: err.message})
     }
 });
+
+router.get('/sessionList', async(req, res) => {
+    try {
+        const sessions = await geminiPrompt.find({modelName: 'Gemini'}).sort({createdAt: -1})
+        res.json(sessions)
+    } catch(err) {
+        res.status(500).json({error: err.message})
+    }
+})
 
 module.exports = router;

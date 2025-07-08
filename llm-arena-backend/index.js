@@ -17,6 +17,9 @@ app.use('/api/gemini', geminiRoute);
 const cohereRoute = require('./routes/cohere');
 app.use('/api/cohere', cohereRoute);
 
+const stabilityRoute = require('./routes/stability');
+app.use('/api/stability', stabilityRoute);
+
 app.get('/', (req, res) => {
     res.send("API is running")
 })

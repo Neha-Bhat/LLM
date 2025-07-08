@@ -15,7 +15,7 @@ function App() {
       <Container fluid>
         <Row>
         <Col sm={3}>
-          <SessionsList />
+          <SessionsList modelName={modelName} />
         </Col>
         <Col>
           <Row>
