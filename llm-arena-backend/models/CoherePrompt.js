@@ -1,11 +1,18 @@
 const mongoose = require("mongoose");
 
-const cohereSchema = new mongoose.Schema({
-    modelName: {type: String, default: 'Cohere'},
+const sessionSchema = new mongoose.Schema({
+    
     prompt: { type: String, required: true },
     response: { type: String, required: true },
-    sessionID: { type: Number, required: true, default: 0},
+    chatID: { type: Number, required: true, default: 0}
+    
+})
+
+const cohereSchema = new mongoose.Schema({
+    modelName: {type: String, default: 'Cohere'},
+    chatHistory: [sessionSchema],
+    sessionID: {type: Number, required: true, default: 0},
     createdAt: {type: Date, default: Date.now}
 })
 
-module.exports = mongoose.model('CoherePrompt', cohereSchema)
+module.exports = mongoose.models.CoherePrompt || mongoose.model('CoherePrompt', cohereSchema);

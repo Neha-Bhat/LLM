@@ -1,11 +1,18 @@
 const mongoose = require("mongoose");
 
-const geminiSchema = new mongoose.Schema({
-    modelName: {type: String, default: 'Gemini'},
+const sessionSchema = new mongoose.Schema({
+    
     prompt: { type: String, required: true },
     response: { type: String, required: true },
-    sessionID: { type: Number, required: true, default: 0},
+    chatID: { type: Number, required: true, default: 0}
+    
+})
+
+const geminiSchema = new mongoose.Schema({
+    modelName: {type: String, default: 'Cohere'},
+    chatHistory: [sessionSchema],
+    sessionID: {type: Number, required: true, default: 0},
     createdAt: {type: Date, default: Date.now}
 })
 
-module.exports = mongoose.model('GeminiPrompt', geminiSchema)
+module.exports = mongoose.models.CoherePrompt || mongoose.model('GeminiPrompt', geminiSchema);

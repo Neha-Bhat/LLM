@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const SessionsList = ({modelName}) => {
     let [session, setSession] = useState([])
+    let [sessionID, setSessionID] = useState(0);
     useEffect(() => {
   const fetchHistory = async () => {
     console.log("sessionList: ", modelName)
@@ -25,10 +26,10 @@ const SessionsList = ({modelName}) => {
                     {
                         session.map(chat => {
                             return (
-                                <Row key={chat.prompt}>
+                                <Row key={chat?.chatHistory[0]?.prompt}>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
-                                <Card.Title>{chat.prompt}</Card.Title>
+                                <Card.Title onClick={() => setSessionID(chat?.sessionID)}>{chat?.chatHistory[0]?.prompt}</Card.Title>
                             </Card.Body>
                         </Card>
                     </Row>

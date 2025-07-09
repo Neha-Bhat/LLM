@@ -10,19 +10,20 @@ import { useState } from 'react';
 function App() {
 
   let [modelName, setModelName] = useState('Gemini');
+  let [sessionID, setSessionID] = useState(0);
   return (
     <div className="App">
       <Container fluid>
         <Row>
         <Col sm={3}>
-          <SessionsList modelName={modelName} />
+          <SessionsList modelName={modelName} setSessionID={setSessionID} />
         </Col>
         <Col>
           <Row>
             <Header setModelName={setModelName} modelName={modelName} />
           </Row>
           <Row>
-            <ChatWindow modelName={modelName} />
+            <ChatWindow modelName={modelName} sessionIDFromList={sessionID} />
           </Row>
         </Col>
       </Row>
