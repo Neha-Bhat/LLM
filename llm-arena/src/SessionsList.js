@@ -4,9 +4,9 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import { useEffect, useState } from "react";
 
-const SessionsList = ({modelName}) => {
+const SessionsList = ({modelName, setSessionID}) => {
     let [session, setSession] = useState([])
-    let [sessionID, setSessionID] = useState(0);
+    // let [sessionID, setSessionID] = useState(0);
     useEffect(() => {
   const fetchHistory = async () => {
     console.log("sessionList: ", modelName)
