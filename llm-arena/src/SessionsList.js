@@ -9,11 +9,9 @@ const SessionsList = ({modelName, setSessionID}) => {
     // let [sessionID, setSessionID] = useState(0);
     useEffect(() => {
   const fetchHistory = async () => {
-    console.log("sessionList: ", modelName)
     const res = await fetch(`http://localhost:3100/api/${modelName}/sessionList`);
     const data = await res.json();
     setSession(data)
-    console.log("Chat History:", data);
   };
 
   fetchHistory();
@@ -21,6 +19,11 @@ const SessionsList = ({modelName, setSessionID}) => {
 
     return (
         <div className="sessions-container">
+            <Row>
+                <button onClick={() => {
+                    setSessionID(0)
+                    }}>New Session</button>
+            </Row>
             <Container>
                 <Col>
                     {

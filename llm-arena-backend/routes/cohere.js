@@ -30,20 +30,36 @@ router.post('/', async (req,res) => {
         const cohereResponse = result.text;
         console.log(cohereResponse)
         if(chatID === 0) chatID = generateChatID()
-        if(sessionID === 0) sessionID = generateSessionID();
-        //Save to Mongo DB
-        const newPrompt = new coherePrompt({
-            modelName: 'Cohere',
-            chatHistory: [{
-                prompt: userPrompt,
-                response: cohereResponse,
-                chatID: chatID,
-            }],
-            sessionID: sessionID,
-            createdAt: Date.now()
-        })
+        if(sessionID === 0) {
+            sessionID = generateSessionID();
+            //Save to Mongo DB
+            const newPrompt = new coherePrompt({
+                modelName: 'Cohere',
+                chatHistory: [{
+                    prompt: userPrompt,
+                    response: cohereResponse,
+                    chatID: chatID,
+                }],
+                sessionID: sessionID,
+                createdAt: Date.now()
+            })
 
-        await newPrompt.save();
+            await newPrompt.save();
+        } else {
+            console.log("else", sessionID)
+            await coherePrompt.findOneAndUpdate(
+                { sessionID: sessionID },
+                {
+                    $push: {
+                        chatHistory: {
+                        prompt: userPrompt,
+                        response:cohereResponse,
+                        chatID: chatID
+                    }
+                    }
+                }
+            )
+        }
         return res.json({output: cohereResponse})
     } catch(err) {
         res.status(500).json({error: err.message})
@@ -56,6 +72,16 @@ router.get('/sessionList', async(req, res) => {
         res.json(sessions)
     } catch(err) {
         res.status(500).json({error: err.message})
+    }
+})
+
+router.get('/allChat', async(req, res) => {
+    const {sessionID, modelName} = req?.query;
+    try {
+        const resp = await coherePrompt.findOne({sessionID, modelName})
+        res.json(resp)
+    } catch(err) {
+        res.status(500).json({ error: err.message });
     }
 })
 

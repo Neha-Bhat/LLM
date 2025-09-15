@@ -29,7 +29,8 @@ router.post('/', async (req,res) => {
         const geminiResponse = result.response.text();
         console.log(result)
         if(chatID === 0) chatID = generateChatID()
-        if(sessionID === 0) sessionID = generateSessionID();
+        if(sessionID === 0) {
+            sessionID = generateSessionID();
         //Save to Mongo DB
         const newPrompt = new geminiPrompt({
                     modelName: 'Gemini',
@@ -43,6 +44,20 @@ router.post('/', async (req,res) => {
                 })
 
         await newPrompt.save();
+        } else {
+            await geminiPrompt.findOneAndUpdate(
+                { sessionID: sessionID },
+                {
+                    $push: {
+                        chatHistory: {
+                        prompt: userPrompt,
+                        response:geminiResponse,
+                        chatID: chatID
+                    }
+                    }
+                }
+            )
+        }
         return res.json({output: geminiResponse})
     } catch(err) {
         res.status(500).json({error: err.message})
@@ -57,5 +72,16 @@ router.get('/sessionList', async(req, res) => {
         res.status(500).json({error: err.message})
     }
 })
+
+router.get('/allChat', async(req, res) => {
+    const {sessionID, modelName} = req?.query;
+    try {
+        const resp = await geminiPrompt.findOne({sessionID, modelName})
+        res.json(resp)
+    } catch(err) {
+        res.status(500).json({ error: err.message });
+    }
+})
+
 
 module.exports = router;

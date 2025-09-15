@@ -1,0 +1,19 @@
+:global(.prompt) {
+    padding: 1rem;
+    background: #dbf79c;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+:global(.response) {
+    padding: 1rem;
+    background: #c7cac1;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
