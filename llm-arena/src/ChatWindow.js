@@ -44,7 +44,7 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
 
     useEffect(() => {
       getChats();
-    },[sessionIDFromList])
+    },[sessionIDFromList, response])
 
 //     const [image, setImage] = useState("");
 
