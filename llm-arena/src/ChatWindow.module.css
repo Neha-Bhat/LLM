@@ -13,7 +13,11 @@
     background: #c7cac1;
     border-radius: 5px;
     margin-bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
+    display: block;
+    text-align: left;
+}
+
+:global(.chat-container) {
+    height: 70vh;
+    overflow-y: auto;
 }

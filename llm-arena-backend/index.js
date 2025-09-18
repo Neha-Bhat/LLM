@@ -11,6 +11,9 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("connected to MongoDB"))
     .catch(err => console.log(err))
 
+const authRouter = require('./routes/auth'); // adjust path if needed
+app.use('/api', authRouter);
+
 const geminiRoute = require('./routes/gemini');
 app.use('/api/gemini', geminiRoute);
 

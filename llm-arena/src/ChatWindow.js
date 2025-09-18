@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DefaultChatWindow from "./DefaultChatWindow";
 import './ChatWindow.module.css'
+import MarkdownRenderer from "./MarkdownRenderer";
 
 const ChatWindow = ({modelName, sessionIDFromList}) => {
   useEffect(() => {
@@ -96,15 +97,17 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
     {
       chats?.chatHistory?.map((chat, index) => {
         return (
-          <div className="parent gap-1 flex flex-column" key={index}>
+          <div className="parent gap-1" key={index}>
             <div className="prompt">{chat?.prompt}</div>
-            <div className="response">{chat?.response}</div>
+            <div className="response">
+              <MarkdownRenderer className='w-100' text={chat?.response} />
+            </div>
           </div>
         )
       })
     }
 
-    <div className="chat-container">
+    <div className="prompt-container">
              <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} maxLength={500} style={{ width: '500px' }}></textarea>
              <button onClick={fetchResponse} disabled={loading}>{loading ? 'Thinking': `Ask ${modelName}`}</button>
         </div>
@@ -114,7 +117,7 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
     return (
       <div className="chat-container">
         <DefaultChatWindow />
-        <div className="chat-container">
+        <div className="prompt-container">
              <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} maxLength={500} style={{ width: '500px' }}></textarea>
              <button onClick={fetchResponse} disabled={loading}>{loading ? 'Thinking': `Ask ${modelName}`}</button>
         </div>

@@ -11,7 +11,7 @@ const Header = ({modelName, setModelName}) => {
     return (
         <div className="header">
             <Dropdown id="dropdown-basic-button" title="Chat Bots" className='flex' onSelect={handleLLMSelection}>
-                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
         {modelName}
       </Dropdown.Toggle>
                 <DropdownMenu>

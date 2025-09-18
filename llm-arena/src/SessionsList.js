@@ -3,6 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
 
 const SessionsList = ({modelName, setSessionID}) => {
     let [session, setSession] = useState([])
@@ -20,9 +21,9 @@ const SessionsList = ({modelName, setSessionID}) => {
     return (
         <div className="sessions-container">
             <Row>
-                <button onClick={() => {
+                <Button variant="secondary" onClick={() => {
                     setSessionID(0)
-                    }}>New Session</button>
+                    }}>New Session</Button>
             </Row>
             <Container>
                 <Col>
@@ -30,7 +31,7 @@ const SessionsList = ({modelName, setSessionID}) => {
                         session.map(chat => {
                             return (
                                 <Row key={chat?.chatHistory[0]?.prompt}>
-                        <Card style={{ width: '18rem' }}>
+                        <Card style={{ width: '100%' }}>
                             <Card.Body>
                                 <Card.Title onClick={() => setSessionID(chat?.sessionID)}>{chat?.chatHistory[0]?.prompt}</Card.Title>
                             </Card.Body>
