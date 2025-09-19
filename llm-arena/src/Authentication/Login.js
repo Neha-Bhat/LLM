@@ -49,6 +49,7 @@ const Login = () => {
         email: "",
         password: ""
       })
+      localStorage.setItem('token', resp.token)
       showToast("Login successful")
       navigate("/llmArena/playground")
       } catch(err) {

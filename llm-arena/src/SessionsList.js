@@ -4,14 +4,15 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
+import api from './Authentication/api';
 
 const SessionsList = ({modelName, setSessionID}) => {
     let [session, setSession] = useState([])
     // let [sessionID, setSessionID] = useState(0);
     useEffect(() => {
   const fetchHistory = async () => {
-    const res = await fetch(`http://localhost:3100/api/${modelName}/sessionList`);
-    const data = await res.json();
+    const res = await api.get(`/${modelName}/sessionList`);
+    const data = await res.data;
     setSession(data)
   };
 

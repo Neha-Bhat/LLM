@@ -6,6 +6,10 @@ const cohere = new CohereClient({
     token: process.env.COHERE_API_KEY
 })
 const coherePrompt = require('../models/CoherePrompt');
+const authMiddleWare = require('../../llm-arena-middleware/auth');
+
+router.use(authMiddleWare)
+
 
 function generateChatID() {
   const min = 10_000_000_000_000_00; // 16-digit minimum
@@ -22,6 +26,7 @@ function generateSessionID() {
 }
 
 router.post('/', async (req,res) => {
+    console.log(req.headers)
     const userPrompt = req.body.prompt;
     let chatID = req.body.chatID;
     let sessionID = req.body.sessionID;
@@ -68,6 +73,7 @@ router.post('/', async (req,res) => {
 
 router.get('/sessionList', async(req, res) => {
     try {
+        console.log(req.user.user.id)
         const sessions = await coherePrompt.find({modelName: 'Cohere'}).sort({createdAt: -1})
         res.json(sessions)
     } catch(err) {

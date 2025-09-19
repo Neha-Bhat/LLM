@@ -4,6 +4,9 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 require('dotenv').config();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const geminiPrompt = require('../models/GeminiPrompt');
+const authMiddleWare = require('../../llm-arena-middleware/auth');
+
+router.use(authMiddleWare)
 
 function generateChatID() {
   const min = 10_000_000_000_000_00; // 16-digit minimum

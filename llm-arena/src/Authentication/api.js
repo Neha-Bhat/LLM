@@ -1,18 +1,22 @@
 import axios from "axios";
+const token = localStorage.getItem('token');
 
 // Creation of axios instance
 const api = axios.create({
-    baseURL: '/api',
+    baseURL: 'http://localhost:3100/api',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
     }
 });
 
 api.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
+    
+    console.log(token)
     if(token) {
-        config.headers['x-auth-token'] = token;
+        config.headers['Authorization'] = `Bearer ${token}`;
     }
+    console.log(config)
     return config;
 }, (error) => {
     return Promise.reject(error)

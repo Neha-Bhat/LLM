@@ -4,6 +4,7 @@ import axios from "axios";
 import DefaultChatWindow from "./DefaultChatWindow";
 import './ChatWindow.module.css'
 import MarkdownRenderer from "./MarkdownRenderer";
+import api from './Authentication/api';
 
 const ChatWindow = ({modelName, sessionIDFromList}) => {
   useEffect(() => {
@@ -18,14 +19,10 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
         setLoading(true);
         setPrompt(prompt)
         try {
-            const res = await fetch(`http://localhost:3100/api/${modelName.toLowerCase()}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            const res = await api.post(`/${modelName.toLowerCase()}`, {
             body: JSON.stringify({prompt, chatID, sessionID: sessionIDFromList})
         })
-        const data = await res.json();
+        const data = res.data;
         if(modelName === 'Gemini' || modelName === 'Cohere')setResponse(data.output || 'No result generated');
         } catch(error) {
             console.error(error)
@@ -38,8 +35,8 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
 
     const getChats = async () => {
       let sessionID = +sessionIDFromList;
-      const res = await fetch(`http://localhost:3100/api/${modelName}/allChat?sessionID=${sessionID}&modelName=${modelName}`)
-      const chatsFromAPI = await res.json()
+      const res = await api.get(`/${modelName}/allChat?sessionID=${sessionID}&modelName=${modelName}`)
+      const chatsFromAPI = res.data
       setChats(chatsFromAPI)
     }
 
