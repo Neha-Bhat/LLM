@@ -10,6 +10,7 @@ const sessionSchema = new mongoose.Schema({
 
 const cohereSchema = new mongoose.Schema({
     modelName: {type: String, default: 'Cohere'},
+    customID: { type: Number, ref: 'User', required: true },
     chatHistory: [sessionSchema],
     sessionID: {type: Number, required: true, default: 0},
     createdAt: {type: Date, default: Date.now}

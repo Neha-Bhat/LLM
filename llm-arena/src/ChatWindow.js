@@ -15,6 +15,7 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
     const [response, setResponse] = useState('');
     const [loading, setLoading] = useState(false);
     const [chats,setChats] = useState(null);
+    const [sessionIDfromDB, setSessionIDfromDB] = useState(0);
     const fetchResponse = async () => {
         setLoading(true);
         setPrompt(prompt)
@@ -23,7 +24,10 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
             body: JSON.stringify({prompt, chatID, sessionID: sessionIDFromList})
         })
         const data = res.data;
-        if(modelName === 'Gemini' || modelName === 'Cohere')setResponse(data.output || 'No result generated');
+        if(modelName === 'Gemini' || modelName === 'Cohere') {
+          setResponse(data.output || 'No result generated');
+          setSessionIDfromDB(data.sessionID)
+        }
         } catch(error) {
             console.error(error)
             setResponse('Error fetching response')
@@ -34,7 +38,9 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
     }
 
     const getChats = async () => {
-      let sessionID = +sessionIDFromList;
+      let sessionID;
+      if(+sessionIDfromDB !== 0) sessionID = +sessionIDfromDB
+      else sessionID = +sessionIDFromList;
       const res = await api.get(`/${modelName}/allChat?sessionID=${sessionID}&modelName=${modelName}`)
       const chatsFromAPI = res.data
       setChats(chatsFromAPI)
@@ -42,7 +48,7 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
 
     useEffect(() => {
       getChats();
-    },[sessionIDFromList, response])
+    },[sessionIDFromList, response, sessionIDfromDB])
 
 //     const [image, setImage] = useState("");
 
@@ -88,7 +94,7 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
 //         </div>
 //     )
 //  }{
-  if(+sessionIDFromList !== 0) {
+  if(+sessionIDfromDB !== 0 || +sessionIDFromList !== 0) {
     return (
   <div className="chats-container ">
     {

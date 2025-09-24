@@ -20,4 +20,5 @@
 :global(.chat-container) {
     height: 70vh;
     overflow-y: auto;
+    max-width: 70vw;
 }

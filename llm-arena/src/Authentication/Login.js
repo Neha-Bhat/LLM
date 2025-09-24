@@ -30,7 +30,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData)
       try {
         const res = await fetch(`http://localhost:3100/api/login`, {
         method: 'POST',
@@ -44,12 +43,13 @@ const Login = () => {
             })
       })
       const resp = await res.json()
-      console.log(resp)
       setFormData({
         email: "",
         password: ""
       })
+    //   e.preventDefault()
       localStorage.setItem('token', resp.token)
+      localStorage.setItem('customID', resp.customID)
       showToast("Login successful")
       navigate("/llmArena/playground")
       } catch(err) {

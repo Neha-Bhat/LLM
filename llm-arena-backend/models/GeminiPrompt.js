@@ -10,7 +10,7 @@ const sessionSchema = new mongoose.Schema({
 
 const geminiSchema = new mongoose.Schema({
     modelName: {type: String, default: 'Cohere'},
-    userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    customID: { type: Number, ref: 'User', required: true },
     chatHistory: [sessionSchema],
     sessionID: {type: Number, required: true, default: 0},
     createdAt: {type: Date, default: Date.now}

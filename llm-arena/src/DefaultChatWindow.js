@@ -5,9 +5,7 @@ const DefaultChatWindow = () => {
     const displayMessage = [];
     const message = ['W', 'h', 'a', 't', 'c', 'a', 'n', 'I', 'h', 'e', 'l', 'p', 'y', 'o', 'u', 'w', 'i', 't', 'h', '?']
     // setInterval(() => {
-    //     // console.log("push")
     //     displayMessage.push(...message)
-    //     console.log(displayMessage)
     //     // message.map(character => displayMessage.push(character))
     // }, 500)
     return (

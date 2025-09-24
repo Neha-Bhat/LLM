@@ -30,10 +30,9 @@ router.post('/register',
 
         const payload ={ user: { id: user.id }};
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
-
         res.json({token})
     } catch(error) {
-        console.error(error.message, res);
+        console.error(error, res);
         res.status(500).send('Server error')
     }
   }
@@ -49,12 +48,12 @@ router.post('/login',
     let user = await User.findOne({email});
     if(!user) return res.status(400).json({msg: 'Invalid credentials'});
 
-    const isMatch = await bcrypt.compare(password, user.password) //compare user entered password with saved password
-    if(!isMatch) return res.status(400).json({msg: 'Invalid credentials'});
+    const isMatch = await bcrypt.compare(password, user.password)
+    if(!isMatch) return res.status(400).json({msg: "Invalid credentials - passwords don't match"});
 
-    const payload = { user: { id: user.id } }; 
+    const payload = { user: { id: user.id, customID: user.customID } }; 
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }); 
-    res.json({ token });
+    res.json({ token, customID: user.customID });
     } catch(err) {
         console.error(err.message, res);
         res.status(500).send('Server error')
