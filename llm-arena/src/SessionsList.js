@@ -20,30 +20,25 @@ const SessionsList = ({modelName, setSessionID}) => {
 }, [modelName]);
 
     return (
-        <div className="sessions-container">
-            <Row>
-                <Button variant="secondary" onClick={() => {
+        <div className="sessions-container flex flex-col">
+            <button className="bg-gray-100 text-gray-700 dark:bg-gray-500 dark:text-gray-200 rounded p-2" onClick={() => {
                     setSessionID(0)
-                    }}>New Session</Button>
-            </Row>
-            <Container>
-                <Col>
-                    {
-                        session.map(chat => {
-                            return (
-                                <Row key={chat?.chatHistory[0]?.prompt}>
-                        <Card style={{ width: '100%' }}>
-                            <Card.Body>
-                                <Card.Title onClick={() => setSessionID(chat?.sessionID)}>{chat?.chatHistory[0]?.prompt}</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Row>
-                            )
-                        })
-                    }
-                    
-                </Col>
-            </Container>
+                    }}>New Session</button>
+            <div>
+                {
+                    session.map(chat => {
+                        return (
+                            <div key={chat?.chatHistory[0]?.prompt} className="flex flex-col">
+                                <Card style={{ width: '100%' }}>
+                                    <Card.Body className="bg-gray-50 text-gray-700 dark:bg-gray-600 dark:text-gray-200 border-gray-50 dark:border-gray-600">
+                                        <Card.Title onClick={() => setSessionID(chat?.sessionID)} className="cursor-pointer"><h6>{chat?.chatHistory[0]?.prompt}</h6></Card.Title>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

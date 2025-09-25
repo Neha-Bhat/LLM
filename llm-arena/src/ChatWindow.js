@@ -96,33 +96,35 @@ const ChatWindow = ({modelName, sessionIDFromList}) => {
 //  }{
   if(+sessionIDfromDB !== 0 || +sessionIDFromList !== 0) {
     return (
-  <div className="chats-container ">
-    {
+  <div className="chats-container flex flex-col w-full h-full">
+    <div className="flex flex-col h-9/10 overflow-y-auto">
+      {
       chats?.chatHistory?.map((chat, index) => {
         return (
-          <div className="parent gap-1" key={index}>
-            <div className="prompt">{chat?.prompt}</div>
-            <div className="response">
+          <div className="parent gap-1 w-full" key={index}>
+            <div className="bg-gray-100 text-gray-700 dark:bg-gray-500 dark:text-gray-200 p-2 mb-2 flex justify-content-end">{chat?.prompt}</div>
+            <div className="bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 p-2 mb-2">
               <MarkdownRenderer className='w-100' text={chat?.response} />
             </div>
           </div>
         )
       })
     }
+    </div>
 
-    <div className="prompt-container">
-             <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} maxLength={500} style={{ width: '500px' }}></textarea>
-             <button onClick={fetchResponse} disabled={loading}>{loading ? 'Thinking': `Ask ${modelName}`}</button>
-        </div>
+    <div className="flex justify-content-center">
+             <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} maxLength={500} className="w-3/4 bg-gray-100 text-gray-700 dark:bg-gray-500 dark:text-gray-200"></textarea>
+             <button onClick={fetchResponse} disabled={loading} className="bg-gray-200 p-2">{loading ? 'Thinking': `Ask ${modelName}`}</button>
+    </div>
   </div>
 )
   } else {
     return (
-      <div className="chat-container">
+      <div className="flex flex-col align-items-center justify-content-center w-full h-full">
         <DefaultChatWindow />
-        <div className="prompt-container">
-             <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} maxLength={500} style={{ width: '500px' }}></textarea>
-             <button onClick={fetchResponse} disabled={loading}>{loading ? 'Thinking': `Ask ${modelName}`}</button>
+        <div className="flex justify-content-center w-3/4">
+             <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} maxLength={500} className="w-3/4 bg-gray-100 text-gray-700 dark:bg-gray-500 dark:text-gray-200"></textarea>
+             <button onClick={fetchResponse} disabled={loading} className="bg-gray-200 p-2">{loading ? 'Thinking': `Ask ${modelName}`}</button>
         </div>
       </div>
     )

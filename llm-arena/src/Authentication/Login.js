@@ -58,7 +58,7 @@ const Login = () => {
     }
 
     return (
-        <div className="login-form container">
+        <div className="flex justify-content-center w-full">
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="email">
                     <Form.Label>Email address</Form.Label>

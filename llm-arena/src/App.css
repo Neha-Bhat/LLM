@@ -1,4 +1,9 @@
-.App {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* .App {
   text-align: center;
 }
 
@@ -40,4 +45,4 @@
 :global(.chat-window) {
   height: 70vh;
   overflow-y: auto;
-}
+} */

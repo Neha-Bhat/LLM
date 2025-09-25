@@ -61,7 +61,7 @@ const Register = () => {
     }
 
     return (
-        <div className="register-form container">
+        <div className="flex justify-content-center w-full border-red-100">
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="firstname">
                     <Form.Label>Firstname</Form.Label>
